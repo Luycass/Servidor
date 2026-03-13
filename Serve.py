@@ -1,25 +1,24 @@
 #!/usr/bin/env python3
-# Servidor TCP para teste do Icounter
-# Recebe mensagens JSON do equipamento e salva em dados.json
-
+# Servidor TCP Robusto para Icounter - Edição Fedora Multi-IP
 import socket
 import json
 import time
 import os
 import platform
+import subprocess
 
 # -------------------------------
-# Descobrir IP local
+# Descobrir todos os IPs locais
 # -------------------------------
-def get_local_ip():
+def get_local_ips():
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
+        # No Fedora, o hostname -I lista todos os IPs atribuídos às interfaces
+        ips = subprocess.check_output(['hostname', '-I']).decode().strip().split()
+        # Remove IPs internos de Docker ou máquinas virtuais (geralmente começam com 172)
+        ips = [ip for ip in ips if not ip.startswith('172.')]
+        return ips if ips else ["127.0.0.1"]
     except:
-        return "127.0.0.1"
+        return ["127.0.0.1"]
 
 # -------------------------------
 # Encontrar porta disponível
@@ -29,6 +28,7 @@ def find_available_port(start_port=5000):
     while port < 65535:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Tenta dar bind apenas para testar se a porta está livre
             s.bind(('0.0.0.0', port))
             s.close()
             return port
@@ -37,7 +37,7 @@ def find_available_port(start_port=5000):
     return None
 
 # -------------------------------
-# Salvar dados recebidos
+# Salvar dados recebidos em dados.json
 # -------------------------------
 def save_to_json(data, filename="dados.json"):
     try:
@@ -68,97 +68,96 @@ def save_to_json(data, filename="dados.json"):
 # -------------------------------
 def process_message(msg, client_ip):
     print(f"📝 Conteúdo recebido:")
-    # Se vierem múltiplos JSONs grudados, tentamos tratar o split básico
-    # No Ruby, lembre-se de enviar com \n no final
+    # Separa por quebra de linha caso o equipamento envie vários exames de uma vez
     messages = msg.strip().split("\n")
     
-    last_response = {"status": "success", "message": "Recebido"}
+    last_response = {"status": "success", "message": "Recebido pelo Servidor"}
 
     for m in messages:
         m = m.strip()
         if not m: continue
         
-        print(f"  > {m}")
+        print(f"  └─ {m}")
         try:
             json_data = json.loads(m)
-            print("  ✅ JSON válido detectado!")
+            print("     ✅ JSON válido!")
             save_to_json(json_data)
         except json.JSONDecodeError:
-            print("  📋 Dados recebidos não são JSON puro")
+            print("     📋 Dados recebidos como texto plano")
             save_to_json({"raw_message": m, "client_ip": client_ip})
 
     return json.dumps(last_response).encode("utf-8")
 
 # -------------------------------
-# Servidor principal (Versão Robusta)
+# Servidor Principal
 # -------------------------------
 def start_server():
-    local_ip = get_local_ip()
+    all_ips = get_local_ips()
     port = find_available_port(5000)
 
     if port is None:
         print("❌ Nenhuma porta disponível")
         return
 
-    # Cabeçalho original preservado
     print("\n" + "="*60)
-    print("🛜 SERVIDOR ICOUNTER INICIADO")
+    print("🛜  SERVIDOR ICOUNTER INICIADO - MODO ROBUSTO")
     print("="*60)
-    print(f"📡 IP: {local_ip}")
-    print(f"🔌 Porta: {port}")
-    print(f"🌐 Endereço: tcp://{local_ip}:{port}")
-    print(f"💾 Salvando em: dados.json")
-    print(f"🖥️ Sistema: {platform.system()}")
+    print("📡 IPs DETECTADOS (Tente estes no equipamento):")
+    for i, ip in enumerate(all_ips, 1):
+        print(f"   {i}. {ip}:{port}")
+    
+    print("-" * 60)
+    print(f"🔌 Porta Ativa: {port}")
+    print(f"💾 Salvando em: {os.path.abspath('dados.json')}")
+    print(f"🖥️  Sistema: {platform.system()} (Fedora)")
     print("="*60)
     print("⏳ Aguardando conexões...\n")
 
+    # Criação do socket principal
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Permite reiniciar o servidor sem erro de "Address already in use"
+    # SO_REUSEADDR evita o erro de "Address already in use" ao reiniciar rápido
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     try:
+        # 0.0.0.0 faz o servidor ouvir em TODAS as placas de rede ao mesmo tempo
         server_socket.bind(("0.0.0.0", port))
         server_socket.listen(5)
 
         while True:
-            # Aguarda nova conexão
             client_socket, client_address = server_socket.accept()
             client_ip = client_address[0]
             
-            print("\n" + "─"*60)
-            print(f"✅ Conexão de {client_ip}:{client_address[1]}")
+            print(f"✅ Conexão estabelecida com {client_ip}")
 
             try:
-                # Timeout de 3 segundos para não travar o servidor
+                # Timeout de 3s para evitar que um socket "morto" trave o servidor
                 client_socket.settimeout(3.0)
                 
-                # Leitura direta do buffer (sem o loop while que causava travamento)
+                # Lê o buffer (8KB é suficiente para os exames do Icounter)
                 data = client_socket.recv(8192)
 
                 if data:
                     print(f"📦 {len(data)} bytes recebidos")
                     msg = data.decode("utf-8", errors="replace").strip()
                     
-                    # Processa e gera resposta
+                    # Processa mensagens e gera resposta confirmando recebimento
                     response = process_message(msg, client_ip)
-                    
-                    # Envia resposta de volta (importante para fechar o ciclo TCP)
                     client_socket.sendall(response)
                 else:
-                    print("⚠️ Conexão aberta, mas vazia.")
+                    print("⚠️ O equipamento conectou mas não enviou dados.")
 
             except socket.timeout:
-                print(f"⏳ Tempo esgotado aguardando dados de {client_ip}")
+                print(f"⏳ Timeout: O equipamento demorou demais para transmitir.")
             except Exception as e:
-                print(f"❌ Erro durante a conexão: {e}")
+                print(f"❌ Erro na sessão: {e}")
             finally:
-                # O ponto crucial: SEMPRE fecha o socket do cliente aqui
+                # Fecha o socket do cliente para liberar o teste no Ruby
                 client_socket.close()
-                print("🔌 Conexão encerrada")
+                print("🔌 Conexão encerrada e porta liberada.")
 
     except KeyboardInterrupt:
         print("\n" + "="*60)
-        print("🛑 Servidor encerrado")
+        print("🛑 Servidor encerrado pelo usuário")
         print("="*60)
     finally:
         server_socket.close()

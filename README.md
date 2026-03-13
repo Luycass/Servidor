@@ -109,3 +109,21 @@ Para descobrir o IP deste computador, veja a mensagem inicial do serve.
 - Para parar: Ctrl+C
 - Dados são salvos automaticamente
 - Compatível com todos modelos Icounter
+
+
+# Passo a Passo para Funcionar Sempre (Fedora):
+Limpeza de Porta: Se o servidor der erro de porta ocupada, rode:
+```
+sudo fuser -k 5000/tcp
+```
+Firewall: Garante que o Fedora não bloqueie o Icounter:
+```
+sudo firewall-cmd --permanent --add-port=5000/tcp
+sudo firewall-cmd --reload
+```
+
+Execução: Rode o script:
+```
+python3 Serve.py
+```
+No Icounter: Use um dos IPs listados (provavelmente o que começa com 192.168.0.x) e coloque a porta 5000.
