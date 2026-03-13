@@ -1,0 +1,626 @@
+[
+  {
+    "name": "",
+    "model": "Icounter3D",
+    "gender": "3d.genders.general",
+    "lab_name": "",
+    "created_at": "2026/03/13 15:55:20",
+    "identifier": "000000000000",
+    "wbc": {
+      "value": "3.84",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lyn": {
+      "value": "0.07",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lynp": {
+      "value": "01.9 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mid": {
+      "value": "1.75",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "midp": {
+      "value": "45.6 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "neu": {
+      "value": "2.02",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "neup": {
+      "value": "52.5 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rbc": {
+      "value": "3.50",
+      "unit": "10⁶/µL",
+      "flag": "N"
+    },
+    "hgb": {
+      "value": "11.9",
+      "unit": "g/dL",
+      "flag": "N"
+    },
+    "hct": {
+      "value": "32.8",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mcv": {
+      "value": "93.6",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "mch": {
+      "value": "34.1",
+      "unit": "pg",
+      "flag": "N"
+    },
+    "mchc": {
+      "value": "36.5",
+      "unit": "g/L",
+      "flag": "N"
+    },
+    "rdw_cv": {
+      "value": "9.94",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rdw_sd": {
+      "value": "47.6",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plt": {
+      "value": " 232",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "mpv": {
+      "value": "8.74",
+      "unit": "µm³",
+      "flag": "N"
+    },
+    "pct": {
+      "value": "0.202",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_cv": {
+      "value": "10.0",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_sd": {
+      "value": "10.7",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plcr": {
+      "value": "12.5",
+      "unit": "%",
+      "flag": "N"
+    },
+    "plcc": {
+      "value": "  29",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "received_at": "2026-03-13 15:55:20"
+  },
+  {
+    "raw_message": "{\"name\":\"\",\"model\":\"Icounter3D\",\"gender\":\"3d.genders.general\",\"lab_name\":\"\",\"created_at\":\"2026/03/13 15:55:20\",\"identifier\":\"000000000000\",\"wbc\":{\"value\":\"3.84\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"lyn\":{\"value\":\"0.07\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"lynp\":{\"value\":\"01.9 %\",\"unit\":\"%\",\"flag\":\"N\"},\"mid\":{\"value\":\"1.75\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"midp\":{\"value\":\"45.6 %\",\"unit\":\"%\",\"flag\":\"N\"},\"neu\":{\"value\":\"2.02\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"neup\":{\"value\":\"52.5 %\",\"unit\":\"%\",\"flag\":\"N\"},\"rbc\":{\"value\":\"3.50\",\"unit\":\"10⁶/µL\",\"flag\":\"N\"},\"hgb\":{\"value\":\"11.9\",\"unit\":\"g/dL\",\"flag\":\"N\"},\"hct\":{\"value\":\"32.8\",\"unit\":\"%\",\"flag\":\"N\"},\"mcv\":{\"value\":\"93.6\",\"unit\":\"fL\",\"flag\":\"N\"},\"mch\":{\"value\":\"34.1\",\"unit\":\"pg\",\"flag\":\"N\"},\"mchc\":{\"value\":\"36.5\",\"unit\":\"g/L\",\"flag\":\"N\"},\"rdw_cv\":{\"value\":\"9.94\",\"unit\":\"%\",\"flag\":\"N\"},\"rdw_sd\":{\"value\":\"47.6\",\"unit\":\"fL\",\"flag\":\"N\"},\"plt\":{\"value\":\" 232\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"mpv\":{\"value\":\"8.74\",\"unit\":\"µm³\",\"flag\":\"N\"},\"pct\":{\"value\":\"0.202\",\"unit\":\"%\",\"flag\":\"N\"},\"pdw_cv\":{\"value\":\"10.0\",\"unit\":\"%\",\"flag\":\"N\"},\"pdw_sd\":{\"value\":\"10.7\",\"unit\":\"fL\",\"flag\":\"N\"},\"plcr\":{\"value\":\"12.5\",\"unit\":\"%\",\"flag\":\"N\"},\"plcc\":{\"value\":\"  29\",\"unit\":\"10³/µL\",\"flag\":\"N\"}}{\"name\":\"Background\",\"model\":\"Icounter3D\",\"gender\":\"3d.genders.general\",\"lab_name\":\"\",\"created_at\":\"2026/03/13 15:54:33\",\"identifier\":\"000000000000\",\"wbc\":{\"value\":\"0.00\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"lyn\":{\"value\":\"0.00\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"lynp\":{\"value\":\"00.0 %\",\"unit\":\"%\",\"flag\":\"N\"},\"mid\":{\"value\":\"0.00\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"midp\":{\"value\":\"00.0 %\",\"unit\":\"%\",\"flag\":\"N\"},\"neu\":{\"value\":\"0.00\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"neup\":{\"value\":\"00.0 %\",\"unit\":\"%\",\"flag\":\"N\"},\"rbc\":{\"value\":\"0.00\",\"unit\":\"10⁶/µL\",\"flag\":\"N\"},\"hgb\":{\"value\":\"0.00\",\"unit\":\"g/dL\",\"flag\":\"N\"},\"hct\":{\"value\":\"0.00\",\"unit\":\"%\",\"flag\":\"N\"},\"mcv\":{\"value\":\"0.00\",\"unit\":\"fL\",\"flag\":\"N\"},\"mch\":{\"value\":\"0.00\",\"unit\":\"pg\",\"flag\":\"N\"},\"mchc\":{\"value\":\"0.00\",\"unit\":\"g/L\",\"flag\":\"N\"},\"rdw_cv\":{\"value\":\"0.00\",\"unit\":\"%\",\"flag\":\"N\"},\"rdw_sd\":{\"value\":\"0.00\",\"unit\":\"fL\",\"flag\":\"N\"},\"plt\":{\"value\":\"   0\",\"unit\":\"10³/µL\",\"flag\":\"N\"},\"mpv\":{\"value\":\"0.00\",\"unit\":\"µm³\",\"flag\":\"N\"},\"pct\":{\"value\":\"0.000\",\"unit\":\"%\",\"flag\":\"N\"},\"pdw_cv\":{\"value\":\"0.00\",\"unit\":\"%\",\"flag\":\"N\"},\"pdw_sd\":{\"value\":\"0.00\",\"unit\":\"fL\",\"flag\":\"N\"},\"plcr\":{\"value\":\"0.00\",\"unit\":\"%\",\"flag\":\"N\"},\"plcc\":{\"value\":\"   0\",\"unit\":\"10³/µL\",\"flag\":\"N\"}}",
+    "client_ip": "192.168.0.158",
+    "received_at": "2026-03-13 15:55:43"
+  },
+  {
+    "name": "Background",
+    "model": "Icounter3D",
+    "gender": "3d.genders.general",
+    "lab_name": "",
+    "created_at": "2026/03/13 15:56:39",
+    "identifier": "000000000000",
+    "wbc": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lyn": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lynp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mid": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "midp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "neu": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "neup": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rbc": {
+      "value": "0.00",
+      "unit": "10⁶/µL",
+      "flag": "N"
+    },
+    "hgb": {
+      "value": "0.00",
+      "unit": "g/dL",
+      "flag": "N"
+    },
+    "hct": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mcv": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "mch": {
+      "value": "0.00",
+      "unit": "pg",
+      "flag": "N"
+    },
+    "mchc": {
+      "value": "0.00",
+      "unit": "g/L",
+      "flag": "N"
+    },
+    "rdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plt": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "mpv": {
+      "value": "0.00",
+      "unit": "µm³",
+      "flag": "N"
+    },
+    "pct": {
+      "value": "0.000",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plcr": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "plcc": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "received_at": "2026-03-13 15:56:48"
+  },
+  {
+    "raw_message": "GET / HTTP/1.1",
+    "client_ip": "127.0.0.1",
+    "received_at": "2026-03-13 16:07:36"
+  },
+  {
+    "raw_message": "Host: 127.0.0.1:5000",
+    "client_ip": "127.0.0.1",
+    "received_at": "2026-03-13 16:07:36"
+  },
+  {
+    "raw_message": "User-Agent: curl/8.9.1",
+    "client_ip": "127.0.0.1",
+    "received_at": "2026-03-13 16:07:36"
+  },
+  {
+    "raw_message": "Accept: */*",
+    "client_ip": "127.0.0.1",
+    "received_at": "2026-03-13 16:07:36"
+  },
+  {
+    "status": "teste_terminal",
+    "received_at": "2026-03-13 16:12:36"
+  },
+  {
+    "name": "",
+    "model": "Icounter3D",
+    "gender": "3d.genders.general",
+    "lab_name": "",
+    "created_at": "2026/03/05 18:17:17",
+    "identifier": "000000000001",
+    "wbc": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lyn": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lynp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mid": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "midp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "neu": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "neup": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rbc": {
+      "value": "0.00",
+      "unit": "10⁶/µL",
+      "flag": "N"
+    },
+    "hgb": {
+      "value": "0.00",
+      "unit": "g/dL",
+      "flag": "N"
+    },
+    "hct": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mcv": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "mch": {
+      "value": "0.00",
+      "unit": "pg",
+      "flag": "N"
+    },
+    "mchc": {
+      "value": "0.00",
+      "unit": "g/L",
+      "flag": "N"
+    },
+    "rdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plt": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "mpv": {
+      "value": "0.00",
+      "unit": "µm³",
+      "flag": "N"
+    },
+    "pct": {
+      "value": "0.000",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plcr": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "plcc": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "received_at": "2026-03-13 16:15:37"
+  },
+  {
+    "name": "",
+    "model": "Icounter3D",
+    "gender": "3d.genders.general",
+    "lab_name": "",
+    "created_at": "2026/03/05 18:17:17",
+    "identifier": "000000000001",
+    "wbc": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lyn": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lynp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mid": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "midp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "neu": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "neup": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rbc": {
+      "value": "0.00",
+      "unit": "10⁶/µL",
+      "flag": "N"
+    },
+    "hgb": {
+      "value": "0.00",
+      "unit": "g/dL",
+      "flag": "N"
+    },
+    "hct": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mcv": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "mch": {
+      "value": "0.00",
+      "unit": "pg",
+      "flag": "N"
+    },
+    "mchc": {
+      "value": "0.00",
+      "unit": "g/L",
+      "flag": "N"
+    },
+    "rdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plt": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "mpv": {
+      "value": "0.00",
+      "unit": "µm³",
+      "flag": "N"
+    },
+    "pct": {
+      "value": "0.000",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plcr": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "plcc": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "received_at": "2026-03-13 16:22:01"
+  },
+  {
+    "name": "Background",
+    "model": "Icounter3D",
+    "gender": "3d.genders.general",
+    "lab_name": "",
+    "created_at": "2026/03/05 18:19:17",
+    "identifier": "000000000000",
+    "wbc": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lyn": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "lynp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mid": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "midp": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "neu": {
+      "value": "0.00",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "neup": {
+      "value": "00.0 %",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rbc": {
+      "value": "0.00",
+      "unit": "10⁶/µL",
+      "flag": "N"
+    },
+    "hgb": {
+      "value": "0.00",
+      "unit": "g/dL",
+      "flag": "N"
+    },
+    "hct": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "mcv": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "mch": {
+      "value": "0.00",
+      "unit": "pg",
+      "flag": "N"
+    },
+    "mchc": {
+      "value": "0.00",
+      "unit": "g/L",
+      "flag": "N"
+    },
+    "rdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "rdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plt": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "mpv": {
+      "value": "0.00",
+      "unit": "µm³",
+      "flag": "N"
+    },
+    "pct": {
+      "value": "0.000",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_cv": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "pdw_sd": {
+      "value": "0.00",
+      "unit": "fL",
+      "flag": "N"
+    },
+    "plcr": {
+      "value": "0.00",
+      "unit": "%",
+      "flag": "N"
+    },
+    "plcc": {
+      "value": "   0",
+      "unit": "10³/µL",
+      "flag": "N"
+    },
+    "received_at": "2026-03-13 16:24:04"
+  }
+]
