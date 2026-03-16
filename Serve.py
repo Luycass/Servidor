@@ -1,44 +1,47 @@
 #!/usr/bin/env python3
-# Servidor TCP Robusto para Icounter - Edição Fedora Multi-IP
 import socket
 import json
 import time
 import os
-import platform
 import subprocess
+import platform
 
-# -------------------------------
-# Descobrir todos os IPs locais
-# -------------------------------
-def get_local_ips():
+# ---------------------------------------------------------
+# FUNÇÃO: run_command
+# Executa comandos no terminal e ignora erros
+# ---------------------------------------------------------
+def run_sys_commands(port):
+    print("🛠️  Executando preparações de sistema...")
     try:
-        # No Fedora, o hostname -I lista todos os IPs atribuídos às interfaces
-        ips = subprocess.check_output(['hostname', '-I']).decode().strip().split()
-        # Remove IPs internos de Docker ou máquinas virtuais (geralmente começam com 172)
-        ips = [ip for ip in ips if not ip.startswith('172.')]
+        # 1. Tenta matar processos na porta 5000 (TCP e UDP)
+        subprocess.run(["sudo", "fuser", "-k", f"{port}/tcp"], stderr=subprocess.DEVNULL)
+        subprocess.run(["sudo", "fuser", "-k", f"{port}/udp"], stderr=subprocess.DEVNULL)
+        
+        # 2. Garante que a porta está aberta no Firewall do Fedora (Firewalld)
+        subprocess.run(["sudo", "firewall-cmd", "--add-port", f"{port}/tcp"], stderr=subprocess.DEVNULL)
+        
+        # 3. Se o SELinux estiver bloqueando, isso ajuda (comum no Fedora)
+        # subprocess.run(["sudo", "setenforce", "0"], stderr=subprocess.DEVNULL) # Opcional: Desativa SELinux temporariamente
+        
+        print("✅ Comandos de liberação enviados.")
+    except Exception as e:
+        print(f"⚠️ Aviso ao executar comandos: {e}")
+
+# ---------------------------------------------------------
+# FUNÇÃO: get_linux_ips
+# ---------------------------------------------------------
+def get_linux_ips():
+    try:
+        output = subprocess.check_output(['hostname', '-I']).decode().strip().split()
+        # Filtra apenas IPv4 reais e ignora Docker (172.)
+        ips = [ip for ip in output if "." in ip and not ip.startswith('172.')]
         return ips if ips else ["127.0.0.1"]
     except:
         return ["127.0.0.1"]
 
-# -------------------------------
-# Encontrar porta disponível
-# -------------------------------
-def find_available_port(start_port=5000):
-    port = start_port
-    while port < 65535:
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            # Tenta dar bind apenas para testar se a porta está livre
-            s.bind(('0.0.0.0', port))
-            s.close()
-            return port
-        except OSError:
-            port += 1
-    return None
-
-# -------------------------------
-# Salvar dados recebidos em dados.json
-# -------------------------------
+# ---------------------------------------------------------
+# FUNÇÃO: save_to_json
+# ---------------------------------------------------------
 def save_to_json(data, filename="dados.json"):
     try:
         if os.path.exists(filename):
@@ -47,11 +50,11 @@ def save_to_json(data, filename="dados.json"):
                     file_data = json.load(f)
                 except:
                     file_data = []
-                if not isinstance(file_data, list):
-                    file_data = [file_data]
         else:
             file_data = []
-
+        
+        if not isinstance(file_data, list): file_data = [file_data]
+        
         entry = data.copy() if isinstance(data, dict) else {"raw_data": str(data)}
         entry["received_at"] = time.strftime('%Y-%m-%d %H:%M:%S')
         file_data.append(entry)
@@ -60,105 +63,66 @@ def save_to_json(data, filename="dados.json"):
             json.dump(file_data, f, indent=2, ensure_ascii=False)
         return True
     except Exception as e:
-        print(f"❌ Erro ao salvar JSON: {e}")
+        print(f"❌ Erro ao salvar arquivo: {e}")
         return False
 
-# -------------------------------
-# Processar mensagem recebida
-# -------------------------------
-def process_message(msg, client_ip):
-    print(f"📝 Conteúdo recebido:")
-    # Separa por quebra de linha caso o equipamento envie vários exames de uma vez
-    messages = msg.strip().split("\n")
-    
-    last_response = {"status": "success", "message": "Recebido pelo Servidor"}
-
-    for m in messages:
-        m = m.strip()
-        if not m: continue
-        
-        print(f"  └─ {m}")
-        try:
-            json_data = json.loads(m)
-            print("     ✅ JSON válido!")
-            save_to_json(json_data)
-        except json.JSONDecodeError:
-            print("     📋 Dados recebidos como texto plano")
-            save_to_json({"raw_message": m, "client_ip": client_ip})
-
-    return json.dumps(last_response).encode("utf-8")
-
-# -------------------------------
-# Servidor Principal
-# -------------------------------
+# ---------------------------------------------------------
+# FUNÇÃO: start_server
+# ---------------------------------------------------------
 def start_server():
-    all_ips = get_local_ips()
-    port = find_available_port(5000)
-
-    if port is None:
-        print("❌ Nenhuma porta disponível")
-        return
+    PORT = 5000
+    
+    # Executa a limpeza antes de tudo
+    run_sys_commands(PORT)
+    
+    ips = get_linux_ips()
 
     print("\n" + "="*60)
-    print("🛜  SERVIDOR ICOUNTER INICIADO - MODO ROBUSTO")
+    print("🐧 SERVIDOR ICOUNTER - FEDORA EDITION (FORÇA BRUTA)")
     print("="*60)
-    print("📡 IPs DETECTADOS (Tente estes no equipamento):")
-    for i, ip in enumerate(all_ips, 1):
-        print(f"   {i}. {ip}:{port}")
-    
+    print("📡 ENDEREÇOS DISPONÍVEIS:")
+    for ip in ips:
+        print(f"   🚀 http://{ip}:{PORT}")
     print("-" * 60)
-    print(f"🔌 Porta Ativa: {port}")
     print(f"💾 Salvando em: {os.path.abspath('dados.json')}")
-    print(f"🖥️  Sistema: {platform.system()} (Fedora)")
     print("="*60)
-    print("⏳ Aguardando conexões...\n")
+    print("⏳ Aguardando conexão do equipamento...\n")
 
-    # Criação do socket principal
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # SO_REUSEADDR evita o erro de "Address already in use" ao reiniciar rápido
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     try:
-        # 0.0.0.0 faz o servidor ouvir em TODAS as placas de rede ao mesmo tempo
-        server_socket.bind(("0.0.0.0", port))
+        # Ouve em todas as interfaces
+        server_socket.bind(("0.0.0.0", PORT))
         server_socket.listen(5)
 
         while True:
             client_socket, client_address = server_socket.accept()
             client_ip = client_address[0]
-            
-            print(f"✅ Conexão estabelecida com {client_ip}")
+            print(f"✅ Conexão detectada de: {client_ip}")
 
             try:
-                # Timeout de 3s para evitar que um socket "morto" trave o servidor
                 client_socket.settimeout(3.0)
+                data = client_socket.recv(16384)
                 
-                # Lê o buffer (8KB é suficiente para os exames do Icounter)
-                data = client_socket.recv(8192)
-
                 if data:
-                    print(f"📦 {len(data)} bytes recebidos")
                     msg = data.decode("utf-8", errors="replace").strip()
+                    print(f"📦 Dados recebidos (IP: {client_ip})")
                     
-                    # Processa mensagens e gera resposta confirmando recebimento
-                    response = process_message(msg, client_ip)
-                    client_socket.sendall(response)
-                else:
-                    print("⚠️ O equipamento conectou mas não enviou dados.")
-
-            except socket.timeout:
-                print(f"⏳ Timeout: O equipamento demorou demais para transmitir.")
+                    try:
+                        json_data = json.loads(msg)
+                        save_to_json(json_data)
+                    except:
+                        save_to_json({"raw": msg, "origin": client_ip})
+                        
+                    client_socket.sendall(b'{"status":"success"}\n')
             except Exception as e:
-                print(f"❌ Erro na sessão: {e}")
+                print(f"❌ Erro no processamento: {e}")
             finally:
-                # Fecha o socket do cliente para liberar o teste no Ruby
                 client_socket.close()
-                print("🔌 Conexão encerrada e porta liberada.")
 
     except KeyboardInterrupt:
-        print("\n" + "="*60)
-        print("🛑 Servidor encerrado pelo usuário")
-        print("="*60)
+        print("\n🛑 Servidor encerrado.")
     finally:
         server_socket.close()
 
